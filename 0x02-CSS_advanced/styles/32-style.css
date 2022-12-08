@@ -323,7 +323,7 @@ ul.row {
     display: var(--header-logo-link-display);
     position: var(--header-logo-link-position);
     top: var(--header-logo-link-top);
-    left: var(--header-logo-link-left)
+    left: var(--header-logo-link-left);
 }
 
 .nav .nav-link::before {
@@ -360,11 +360,11 @@ ul.row {
     right: -0.1rem;
     left: -0.1rem;
     z-index: 1;
+    transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .card-work:hover .card-inner {
     background-color: rgba(0, 0, 0, 0.7);
-    transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .card-work .card-title {
