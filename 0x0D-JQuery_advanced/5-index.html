@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8"/>
+        <script type="application/javascript" src="https://code.jquery.com/jquery-3.6.3.slim.min.js"></script>
+        <style>
+            .delete {
+                background-color: orange;
+            }
+        </style>
+        <title>Task 4</title>
+
+    </head>
+    <body>
+
+        <script type="application/javascript">
+        window.onload = function() {
+            function createFamilyTree() {
+                $("body").append($("<table></table>")
+                .append(
+                    $("<thead></thead>").append(
+                        $("<th></th>").text("Firstname"), $("<th></th>").text("Lastname"))
+                    , $("<tbody></tbody>"))
+                );
+            }
+            function addNewMember(firstName, lastName) {
+                $("tbody")
+                    .append($("<tr></tr>")
+                        .append($("<td></td>").text(firstName), 
+                                $("<td></td>").text(lastName), 
+                                $("<td></td>").text("(X)").addClass("delete").click(function () {
+                                    $(this).parent("tr").remove();
+                                })))
+            }
+            createFamilyTree();
+            const users = [
+                {
+                    firstName:"Guillaume", lastName: "Salva"
+                }, 
+                {
+                    firstName:"Arielle", lastName: "Snizt"
+                },
+                {
+                    firstName:"Fanette", lastName: "Snizt"
+                },
+                {
+                    firstName:"Gerard", lastName: "Snizt"
+                }, 
+                {
+                    firstName:"Victor", lastName: "Salva"
+                }]
+            for (const user of users) {
+                addNewMember(user.firstName, user.lastName);
+            }    
+        }
+        </script>
+    </body>
+
+</html>
