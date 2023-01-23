@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8"/>
+        <script type="application/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+        <title>Task 7</title>
+
+    </head>
+    <body>
+        
+        <script type="application/javascript">
+        window.onload = function() {
+          function createSearchForm() {
+              $("body").prepend(
+                  $("<input>").attr("type", "text"),
+                  $("<input>").attr("type", "submit").click(function () {
+                      console.log($("input:nth-child(1)").val());
+                    queryWikipedia($("input:nth-child(1)").val());
+                  }),
+                  $("<ul></ul>")
+              );
+          }
+
+          function addNewArticle(id, title, snippet) {
+            
+            $("ul").append(
+                $("<li></li>").append(
+                    $("<p></p>").append(
+                        $("<span></span>").text(`${id} - `),
+                        $("<b></b>").text(title)
+                    ),
+                    $("<p></p>").html(snippet)
+                )
+            )
+          }
+
+          function queryWikipedia(search) {
+            $.ajax({
+                url: "http://www.mediawiki.org/w/api.php",
+                type: 'GET',
+                data: {
+                    origin: "*",
+                    action: "query",
+                    srsearch: search,
+                    list: "search",
+                    format:"json",
+                    
+                },
+                dataType: "json",
+                success: function (data) {
+                    $("ul").html("");
+                    for (const d of data.query.search) {
+                        addNewArticle(d.pageid, d.title, d.snippet);
+                    }
+                },
+
+            })
+          }
+          createSearchForm();
+        }
+        </script>
+    </body>
+
+</html>
