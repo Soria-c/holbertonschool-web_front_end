@@ -1,0 +1,64 @@
+{
+    "posts": [
+      {
+        "id": 1,
+        "title": "qwe",
+        "author": "asd"
+      },
+      {
+        "title": "zxc",
+        "author": "fffff",
+        "id": 2
+      },
+      {
+        "title": "fd",
+        "author": "fffff",
+        "id": 3
+      },
+      {
+        "title": "f",
+        "author": "f",
+        "id": 4
+      },
+      {
+        "title": "ert",
+        "author": "dfg",
+        "id": 5
+      },
+      {
+        "title": "rty",
+        "author": "fgh",
+        "id": 6
+      },
+      {
+        "title": "tyu",
+        "author": "ghj",
+        "id": 7
+      },
+      {
+        "title": "yui",
+        "author": "hjk",
+        "id": 8
+      },
+      {
+        "title": "uio",
+        "author": "jkl",
+        "id": 9
+      },
+      {
+        "title": "vbn",
+        "author": "ghj",
+        "id": 10
+      }
+    ],
+    "comments": [
+      {
+        "id": 1,
+        "body": "some comment",
+        "postId": 1
+      }
+    ],
+    "profile": {
+      "name": "typicode"
+    }
+}
