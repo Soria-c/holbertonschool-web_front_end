@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+        const issessionStorageEnabled = () => {
+            try {
+                const key = `__storage__test`;
+                window.sessionStorage.setItem(key, null);
+                window.sessionStorage.removeItem(key);
+                return true;
+            } catch (e) {
+                return false;
+        }
+    }
+        if(issessionStorageEnabled()) {
+            function addItemToCart(item) {
+                sessionStorage.setItem(item, "true")
+            }
+
+            function createStore() {
+                const ul = document.createElement("ul");
+                for (const i of availableItems) {
+                    let li = document.createElement("li");
+                    li.innerText = i;
+                    li.addEventListener("click", () => {
+                        addItemToCart(i);
+                        displayCart();
+                    })
+                    ul.append(li)
+                }
+                document.body.append(ul);
+                
+            }
+
+            function displayCart() {
+                if (sessionStorage.length > 0) {
+                    const p0 = document.getElementById("cart");
+                    const p = !p0? document.createElement("p") : p0;
+                    p.id = "cart";
+                    p.innerText = `You previously had ${sessionStorage.length} items in your cart`;
+                    document.body.append(p);
+                }
+            }
+            createStore();
+            displayCart();
+
+        } else {
+            alert("Sorry, your browser does not support Web storage. Try again with a better one");
+        }
+
+    </script>
+</body>
+</html>
