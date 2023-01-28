@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .logout {
+            font-style: italic;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+   
+    <script type="application/javascript">
+        
+            Date.prototype.addDays = function(days) {
+                let date = new Date(this.valueOf());
+                date.setDate(date.getDate() + (days));
+                return date;
+            }
+
+            function setCookies() {
+                const firstname = document.getElementById("firstname");
+                const email = document.getElementById("email");
+                document.cookie = `firstname=${firstname.value};expires=${(new Date()).addDays(30).toUTCString()}`
+                document.cookie = `email=${email.value};expires=${(new Date()).addDays(30).toUTCString()}`
+                showWelcomeMessageOrForm();
+
+            }
+            function setCookiesAndShowWelcomeMessage() {
+                const firstname = document.getElementById("firstname");
+                const email = document.getElementById("email");
+                Cookies.set('firstname', firstname.value, { expires: 30 })
+                Cookies.set('email', email.value, { expires: 30 })
+                showWelcomeMessageOrForm();
+            }
+
+            function showForm(){
+                document.body.innerHTML = `
+                <div>
+                    <h1>Login to the Website</h1>
+                    <input type="text" placeholder="Firstname" id="firstname">
+                    <input type="text" placeholder="Email" id="email">
+                    <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+                </div>
+                `;
+            }
+            function hideForm(){
+                document.getElementById("form").innerText = "";
+            }
+            
+            function deleteCookiesAndShowForm() {
+                Cookies.remove("firstname");
+                Cookies.remove("email");
+                showForm();
+            }
+
+            function showWelcomeMessageOrForm() {
+                if (document.cookie === "") {
+                    showForm();
+                }
+                else {
+                    const h1 = document.createElement("h1");
+                    const a = document.createElement("a");
+                    a.innerText = "(logout)";
+                    a.classList.add("logout");
+                    h1.innerText = `Welcome ${Cookies.get("firstname")} `
+                    a.addEventListener("click", () => {
+                        deleteCookiesAndShowForm()
+                    })
+                    h1.append(a);
+                    document.body.innerHTML= "";
+                    document.body.append(h1);
+                    
+                }
+            }
+            showWelcomeMessageOrForm();
+
+        
+    </script>
+</body>
+</html>
